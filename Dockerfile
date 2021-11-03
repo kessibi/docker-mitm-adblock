@@ -28,6 +28,9 @@ RUN rm -rf /tmp/mitm*
 RUN apk del git gcc musl-dev libffi-dev openssl-dev wget
 # g++ and re2-dev are needed for runtime
 
+RUN cat go | sed 's/100k/100k --set block_global=false/g' > go2
+RUN chmod +x go2 && mv go2 go
+
 EXPOSE 8118
 
 CMD ["sh", "go", "-d"]
